@@ -1,0 +1,365 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	/* padding: 0; I've edited this out*/ 
+	border: 0;
+	font-size: 100%;
+	font-family: Helvetica, sans-serif;
+	vertical-align: baseline;
+    box-sizing: border-box; /* I've added this in */
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* The above code is called CSS Reset, it is meant to take the default styling off of all elements to make them more easily manipulated */
+/* Universal Classes */
+
+#underCon {
+    background: linear-gradient(
+        var(--startOrange),
+        VAR(--endOrange) 50%
+    );
+    height: 100vh;
+    font-size: 6em;
+    text-align: center;
+    padding: 10vw
+}
+
+* {
+    font-family: Helvetica;
+    --lightGray: #E6EBEC;
+    --startOrange: #FFAB65;
+    --midOrange: #FF9D65;
+    --endOrange: #FF8A65;
+    --startBlue: #64B5F6;
+    --midBlue: #1976D2;
+    --endBlue: #1A237E;
+    --navy: #0E123E;
+}
+
+header {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 10;
+    transition: background-color .5s;
+}
+
+.navLink {
+    margin: 10px min(30px, 2vw);
+    font-size: clamp(1.25em, 2vmax, 2em);
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    color: white;
+}
+
+nav:active {
+    background-color: var(--endBlue)
+}
+
+nav:active .navLink{
+    text-shadow: 3px 3px 5px var(--startBlue)
+}
+
+.landingShadow {
+    text-shadow: 5px 5px 10px hsl(6, 60%, 50%);
+}
+
+.blueShadow {
+    text-shadow: 5px 5px 10px #000033;
+}
+
+.fadeIn {
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scaleOnHover {
+    transition: scale 0.33s
+}
+
+.scaleOnHover:hover {
+    scale: 1.05
+}
+
+/* Universal Classes */
+/* Home */
+
+#indexBody {
+    height: 100vh;
+    background-color: var(--endOrange);
+    overflow-x: hidden;
+}
+
+#landing {
+    color: white;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 66vw 33vw;
+    grid-template-rows: 75vh 25vh;
+    grid-template-areas: 
+        "namesake ."
+        "waveMachine waveMachine"
+}
+
+#namesake {
+    width: 100%;
+    height: 100%;
+    font-size: clamp(4em, 12vmax, 15em);
+    grid-area: namesake;
+    align-self: flex-end;
+    padding: 20vh 0 10vh 2vw;
+    background: radial-gradient(
+        circle at left top,
+        var(--startOrange) 20%,
+        var(--endOrange) 50%
+    );
+    z-index: 10;
+}
+
+#waveMachine {
+    grid-area: waveMachine;
+    height: 25vh;
+    width: 150%;
+    overflow-x: hidden;
+    background: linear-gradient(
+        var(--endOrange) 5vh,
+        var(--startBlue) 5vh
+    );
+}
+
+#waveMachine div {
+    width: 16vw;
+    height: 10vh;
+    margin: 0 -1vw;
+    animation: 8s ease-in-out infinite waves;
+    background-color: var(--endOrange);
+    border-radius: 33% 67% / 50% 50%;
+    display: inline-block;
+    border: none;
+}
+
+@keyframes waves {
+    0% {
+        transform: translateX(0) rotate(-1deg);
+    }
+    66% {
+        transform: translateX(-125%) rotate(6deg);
+    }
+    100% {
+        transform: translateX(calc(-87.5% - 5px)) rotate(-1deg);
+    }
+}
+
+
+
+/* Home */
+/* About */
+
+#aboutBody {
+    color: white;
+    background: linear-gradient(
+        var(--startBlue),
+        var(--midBlue)
+    );
+}
+
+#tooltip {
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity .33s;
+    background-color: var(--lightGray);
+    font-size: 1.25em;
+    padding: 5px;
+    border-radius: 5px;
+    /*Hovering over the tooltip can cause mouseenter events to be missed. Removing pointer events on the tooltip fixes this*/
+    pointer-events: none;
+}
+
+#aboutGrid {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 20vw 40vw 20vw 20vw;
+    grid-template-rows: 100%;
+    grid-template-areas:
+        "col1 bio tech col2"
+    ;
+    column-gap: 20px;
+}
+
+.minorTitle {
+    font-size: clamp(1.25rem, 3vmax, 2.5rem);
+    margin: 2vh;  
+}
+
+#threeWide {
+    height: 80%;
+    align-self: center;
+    border-radius: 0 20px 20px 0;
+    grid-area: tech;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-center;
+    background-color: var(--endBlue);
+    padding: 25px
+}
+
+#threeWide h3 {
+    flex-basis: 100%;
+}
+
+#threeWide svg {
+    min-width: 50px;
+    max-height: 100px;
+    flex-basis: 26%;
+    margin: 10px auto;
+    fill: white;
+}
+
+#whiteOnOrange {
+    width: 100%;
+    background-color: var(--endOrange);
+    height: 80vh;
+    align-self: center;
+    grid-area: bio;
+    font-size: 1.5em;
+    line-height: min(4vw, 35px);
+    text-indent: 50px;
+    font-size: clamp(0.75em, 2vmax, 1.5em);
+    border-radius: 20px 0 0 20px;
+    padding: 25px 50px;
+    letter-spacing: 0.05em;
+}
+
+/* About */
+/* Resume */
+
+#resumeBody {
+    height: 100%;
+}
+
+#resumeGrid {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+        var(--midBlue),
+        var(--endBlue)
+    );
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    grid-template-rows: 10vh 1fr 10vh;
+    grid-template-areas:
+        "img . . ."
+        ". col1 col2 ."
+        ". . . ."
+    ;
+    font-size: 1.1em;
+}
+
+#pfp {
+    height: 15vw;
+    justify-self: center;
+    margin-top: 10vh;
+}
+
+#resumeGrid h1 {
+    font-size: 4em;
+    margin: 3vh auto 0 auto;
+}
+
+#resumeGrid abbr {
+    font-size: 0.8em;
+    margin: 2vh 10px
+}
+
+#resumeGrid h2 {
+    font-size: 1.5em;
+    margin: 3vh auto 2vh auto;
+    color: var(--midBlue);
+}
+
+#resumeGrid h3 {
+    font-size: 1.25em;
+    margin: 2vh auto 1vh auto;
+}
+
+.thin {
+    font-weight: 400;
+}
+
+#resumeGrid ul {
+    margin: 1.5vh auto;
+}
+
+#resumeGrid li {
+    list-style-type: circle;
+    margin: 1vh auto;
+}
+
+#col1 {
+    grid-area: col1;
+    background-color: var(--lightGray);
+    border-radius: 20px 0 0 20px;
+    padding: 30px;
+}
+
+#col2 {
+    grid-area: col2;
+    background-color: var(--lightGray);
+    border-radius: 0 20px 20px 0;
+    padding: calc(30px + 3vh) 30px 30px 30px;
+}
+
+/* Resume */
